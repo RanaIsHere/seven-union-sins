@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Sprites/Player/playerExplosion.gd" type="Script" id=1]
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 152.798
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.317829, 1 )
+colors = PoolColorArray( 0.0784314, 0, 0.121569, 0, 0.641513, 0, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 34.88
+initial_velocity_random = 0.4
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color_ramp = SubResource( 2 )
+
+[node name="playerExplosion" type="Area2D"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.694489, 0 )
+shape = SubResource( 4 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+scale = Vector2( 8, 8 )
+amount = 200
+process_material = SubResource( 1 )
+
+[node name="explosionGas" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_playerExplosion_body_entered"]
+[connection signal="timeout" from="explosionGas" to="." method="_on_explosionGas_timeout"]

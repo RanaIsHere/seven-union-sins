@@ -1,0 +1,140 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Sprites/Cards/Card_Wrath.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Cards/Card_Greed.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Cards/Card_Sloth.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Cards/Card_Gluttony.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Cards/Card_Envy.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Cards/Card_Lust.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Cards/Card_Pride.png" type="Texture" id=7]
+[ext_resource path="res://GUI/SinsUI.gd" type="Script" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "ShowCards"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Cards:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -100 ) ]
+}
+
+[node name="SinsUI" type="Control"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -512.0
+margin_top = -600.0
+margin_right = 512.0
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cards" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Wrath" type="TextureRect" parent="Cards"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 203.563
+margin_top = 531.156
+margin_right = 227.563
+margin_bottom = 659.156
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pride" type="TextureRect" parent="Cards"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 294.332
+margin_top = 531.156
+margin_right = 318.332
+margin_bottom = 659.156
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Envy" type="TextureRect" parent="Cards"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 387.771
+margin_top = 531.156
+margin_right = 411.771
+margin_bottom = 659.156
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sloth" type="TextureRect" parent="Cards"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 475.87
+margin_top = 531.156
+margin_right = 499.87
+margin_bottom = 659.156
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Greed" type="TextureRect" parent="Cards"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 567.083
+margin_top = 531.156
+margin_right = 591.083
+margin_bottom = 659.156
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gluttony" type="TextureRect" parent="Cards"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 658.294
+margin_top = 531.156
+margin_right = 682.294
+margin_bottom = 659.156
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lust" type="TextureRect" parent="Cards"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 748.395
+margin_top = 529.967
+margin_right = 772.395
+margin_bottom = 657.967
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/ShowCards = SubResource( 1 )
