@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://GUI/MainMenu.gd" type="Script" id=1]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://GUI/Silver.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 128
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://GUI/Silver.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 64
+font_data = SubResource( 3 )
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -301.0
+margin_top = 19.0488
+margin_right = 301.0
+margin_bottom = 161.049
+custom_fonts/font = SubResource( 2 )
+text = "Seven Union Sins"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="start" type="Button" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -58.0
+margin_top = 158.919
+margin_right = 59.0
+margin_bottom = 236.919
+custom_fonts/font = SubResource( 4 )
+text = "START"
+
+[node name="exit" type="Button" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -58.0
+margin_top = 255.244
+margin_right = 59.0
+margin_bottom = 333.244
+custom_fonts/font = SubResource( 4 )
+text = "EXIT"
+
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]

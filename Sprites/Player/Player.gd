@@ -2,11 +2,12 @@ extends KinematicBody2D
 
 var playerHealth = 200
 var playerUnion = ["Wrath", "Pride", "Envy", "Sloth", "Greed", "Gluttony", "Lust"]
-var baseDamage = 10
+var baseDamage = 40
 var gold = 1000
 
 var abletoFire = true
 var slothBomb = 3
+var abletoWrath = true
 
 var wrathDamage = 100
 var prideDamage = 2
@@ -20,11 +21,14 @@ var isLust = 0
 
 var playerSpeed = 200
 var velocity = Vector2.ZERO
+var unionCount = Globals.playerUnion.size()
 
 export (PackedScene) var wrathBullet = preload("res://Sprites/Bullet/wrathBullet.tscn")
 export (PackedScene) var envyBullet = preload("res://Sprites/Bullet/envyBullet.tscn")
 export (PackedScene) var slothBullet = preload("res://Sprites/Player/playerExplosion.tscn")
 export (PackedScene) var greedBullet = preload("res://Sprites/Bullet/goldBullet.tscn")
+export (PackedScene) var normalBullet = preload("res://Sprites/Bullet/normalBullet.tscn")
+
 
 func _ready():
 	gold = 1000
@@ -35,11 +39,16 @@ func _ready():
 	slothBomb = 3
 	
 func shoot(delta):
+	print(abletoWrath)
 	if Input.is_action_just_pressed("wrath"):
 		if Globals.playerUnion.has("Wrath"):
-			var wrathBt = wrathBullet.instance()
-			owner.add_child(wrathBt)
-			wrathBt.transform = $shootPos.global_transform
+			if abletoWrath != false:
+				var wrathBt = wrathBullet.instance()
+				owner.add_child(wrathBt)
+				wrathBt.transform = $shootPos.global_transform
+				$AudioStreamPlayer2D.playing = true
+				abletoWrath = false
+				
 		
 	if Input.is_action_just_pressed("envy"):
 		if Globals.playerUnion.has("Envy"):
@@ -76,7 +85,18 @@ func shoot(delta):
 				$gluttonyArea/Particles2D.emitting = true
 				$gluttonyArea/gluttonyTimer.start()
 				print("EAT")
-
+	
+	if Input.is_action_just_pressed("wrath"):
+		if Globals.playerUnion.has("Wrath"):
+			var wrathBt = wrathBullet.instance()
+			owner.add_child(wrathBt)
+			wrathBt.transform = $shootPos.global_transform
+			
+	if Input.is_action_just_pressed("shoot"):
+		if !Globals.playerUnion.has("Pride"):
+			var normalBt = normalBullet.instance()
+			owner.add_child(normalBt)
+			normalBt.transform = $shootPos.global_transform
 
 func sinsControl(delta):
 	Globals.playerUnion = playerUnion
@@ -194,6 +214,7 @@ func _physics_process(delta):
 			playerHealth = 50
 			isLust = -1
 	
+	unionCount = Globals.playerUnion.size()
 	$GUI/PlayerBar.value = playerHealth
 	look_at(get_global_mouse_position())
 	$shootPos.look_at(get_global_mouse_position())
@@ -214,3 +235,8 @@ func _on_gluttonyTimer_timeout():
 		isGluttony = false
 		$gluttonyArea/CollisionShape2D.disabled = true
 		$gluttonyArea/Particles2D.emitting = false
+
+
+func _on_AudioStreamPlayer2D_finished():
+	abletoWrath = true
+	$AudioStreamPlayer2D.playing = false

@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 var health = 200
-var enemySpeed = 50
+var enemySpeed = 80
 var enemyDamage = 10
 var player = null
 var isChained = false
@@ -10,7 +10,7 @@ var targetedPlayer = null
 
 func _ready():
 	health = 200
-	enemySpeed = 50
+	enemySpeed = 80
 	enemyDamage = 10
 	player = null
 	isChained = false
@@ -26,6 +26,10 @@ func _physics_process(delta):
 	if Globals.enemyUnion.has(self):
 		isChained = true
 		
+	if !Globals.playerUnion.has("Lust"):
+		enemySpeed = 100
+	else:
+		enemySpeed = 80
 	
 	if isChained:
 		$Particles2D.emitting = true

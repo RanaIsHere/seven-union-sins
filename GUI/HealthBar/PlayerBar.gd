@@ -9,14 +9,17 @@ func _ready():
 
 func _process(delta):
 	$HealthBar.value = value
-	time += delta
-	Globals.score += round(10) * delta
-	$Time.text = "Time: " + String(round(time))
-	$Score.text = "Score: " + String(round(Globals.score))
+	if get_tree().paused == false:
+		time += delta
+		Globals.score += round(10) * delta
+		$Time.text = "Time: " + String(round(time))
+		$Score.text = "Score: " + String(round(Globals.score))
+		$DeathMenu/AudioStreamPlayer2D.playing = false
 	
 	if Globals.death == true:
 		$DeathMenu.visible = true
-
+		if $DeathMenu/AudioStreamPlayer2D.playing == false:
+			$DeathMenu/AudioStreamPlayer2D.play()
 
 func _on_retry_pressed():
 	Globals.death = false
